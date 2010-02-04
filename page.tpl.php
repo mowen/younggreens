@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="<?php print $language ?>" xml:lang="<?php print $language ?>">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language ?>" lang="<?php print $language->language ?>">
 
 <head>
 
@@ -18,113 +18,95 @@
 
 <body>
 
-<!-- begin wrapper -->
+  <!-- begin container -->
   <div id="container">
 
-      <!-- primary links -->
-      <div id="menu">
-        <?php print theme('menu_links', $primary_links) ?>
-      </div><!-- end primary links -->
+    <!-- primary links -->
+    <div id="menu">
+      <?php if (isset($primary_links)) : ?>
+        <?php print theme('links', $primary_links) ?>
+      <?php endif; ?>
+    </div><!-- end primary links -->
 
+    <!-- begin header -->
 
-
-   <!-- begin header -->
     <div id="header">
 
-
-    <!-- site logo -->
-    <?php if ($logo) { ?>
+      <!-- site logo -->
+      <?php if ($logo) : ?>
         <a href="<?php print $base_path ?>" title="<?php print t('Home') ?>">
           <img class="logo" src="<?php print $logo ?>" alt="<?php print t('Home') ?>" />
         </a>
-    <?php } ?><!-- end site logo -->
+      <?php endif; ?><!-- end site logo -->
 
-    <!-- site name -->
+      <!-- site name -->
       <?php if ($site_name) : ?>
-            <h1>
-	      <a href="<?php print $base_path ?>" title="<?php print t('Home') ?>">
-	        <?php print $site_name ?>
-	      </a>
-	    </h1>
-	  <?php endif; ?><!-- end site name -->
-	  <!-- site slogan -->
-          <?php if ($site_slogan) : ?>
-	      <h2>
-	        <?php print $site_slogan ?>
-	      </h2>
-	    <?php endif; ?><!-- end site slogan -->
+        <h1>
+	  <a href="<?php print $base_path ?>" title="<?php print t('Home') ?>">
+	    <?php print $site_name; ?>
+	  </a>
+	</h1>
+      <?php endif; ?><!-- end site name -->
+	  
+      <!-- site slogan -->
+      <?php if ($site_slogan) : ?>
+        <h2>
+	<?php print $site_slogan; ?>
+	  </h2>
+      <?php endif; ?><!-- end site slogan -->
 
-  </div><!-- end header -->
+    </div><!-- end header -->
 
-  <!-- search box in nowhere land - NEEDS WORK-->
-  <?php if ($search_box) : ?>
-   <div id="searchBox">
-      <div class="wrap">
-        <div class="form-item">
-          <?php print $search_box ?>
-	</div>
-      </div>
-    </div>
-  <?php endif; ?><!-- end search box -->
+    <!-- content -->
 
-
-  <!-- content -->
-<!--  <div id="main">-->
-    <!-- begin main content -->
+    <!-- begin mainContent -->
     <div id="mainContent" style="width: <?php print amadou_get_mainContent_width( $sidebar_left, $sidebar_right) ?>px;">
         
-          <?php if ($mission) { ?><div class="mission"><?php print $mission ?></div><?php } ?>
-          <?php if ($breadcrumb) { ?><div class="breadcrumb"><?php print $breadcrumb ?></div><?php } ?>
-          <?php if ($title) { ?><h1 class="pageTitle"><?php print $title ?></h1><?php } ?>
-          <?php if ($tabs) { ?><div class="tabs"><?php print $tabs ?></div><?php } ?>
-          <?php if ($help) { ?><div class="help"><?php print $help ?></div><?php } ?>
-          <?php if ($messages) { ?><div class="messages"><?php print $messages ?></div><?php } ?>
-	  <?php print $content_top; ?>
-          <?php print $content; ?>
-	  <?php print $content_bottom; ?>
-	  <?php print $feed_icons; ?>
+    <?php if ($mission): print '<div class="mission">'. $mission .'</div>'; endif; ?>
+    <?php if ($breadcrumb): print '<div class="breadcrumb">'. $breadcrumb . '</div>'; endif; ?>
+    <?php if ($title) : print '<h1 class="pageTitle">' . $title . '</h1>'; endif; ?>
+    <?php if ($tabs) : print '<div class="tabs">' . $tabs . '</div>'; endif; ?>
+    <?php if ($help) : print '<div class="help">' . $help . '</div>'; endif; ?>
+    <?php if ($messages) : print '<div class="messages">' .$messages . '</div>'; endif; ?>
+    <?php print $content_top; ?>
+    <?php print $content; ?>
+    <?php print $content_bottom; ?>
+    <?php print $feed_icons; ?>
 
-      </div>
+    </div><!-- end mainContent -->
 
-      <!-- Begin Sidebars -->
+    <!-- begin sideBars -->
+
     <div id="sideBars-bg" style="width: <?php print amadou_get_sideBars_width( $sidebar_left, $sidebar_right) ?>px;">
       <div id="sideBars" style="width: <?php print amadou_get_sideBars_width( $sidebar_left, $sidebar_right) ?>px;">
 
-	<!-- left sidebar -->
-        <?php if ($sidebar_left) { ?>
+        <!-- left sidebar -->
+        <?php if ($sidebar_left) : ?>
           <div id="leftSidebar">
-            <?php print $sidebar_left ?>
+            <?php print $sidebar_left; ?>
           </div>
-        <?php } ?>
+        <?php endif; ?>
         
         <!-- right sidebar -->
-        <?php if ($sidebar_right) { ?>
+        <?php if ($sidebar_right) : ?>
           <div id="rightSidebar">
-            <?php print $sidebar_right ?>
+            <?php print $sidebar_right; ?>
           </div>
-        <?php } ?>
+        <?php endif; ?>
 
-      </div><!-- end sidebars -->
+      </div><!-- end sideBars -->
     </div><!-- end sideBars-bg -->
     
 
 
-  <!-- footer -->
+    <!-- footer -->
     <div id="footer">
-      <?php print $footer_message ?> 
+      <?php print $footer_message; ?>
+      <?php print $footer; ?>
     </div><!-- end footer -->
     
   </div><!-- end container -->
   
   <?php print $closure ?>
-  <script type="text/javascript">
-  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-  </script>
-  <script type="text/javascript">
-  var pageTracker = _gat._getTracker("UA-3498576-1");
-  pageTracker._initData();
-  pageTracker._trackPageview();
-  </script>
 </body>
 </html>

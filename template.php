@@ -1,24 +1,6 @@
 <?php
 // Amadou 3.x
-// $Id: template.php,v 1.6.2.1.6.3 2007/07/04 21:13:16 jwolf Exp $
-
-/**
- * Declare the available regions implemented by this engine.
- *
- * @return
- *    An array of regions.  The first array element will be used as the default region for themes.
- *    Each array element takes the format: variable_name => t('human readable name')
- */
-function amadou_regions() {
-    return array(
-	'header' => t ('header'),
-        'content_top' => t('content top'),
-        'sidebar_left' => t('sidebar left'),
-        'sidebar_right' => t('sidebar right'),
-        'content_bottom' => t('content bottom'),
-        'footer' => t('footer')
-    );
-}
+// $Id: template.php,v 1.6.2.1.6.3.2.7 2007/12/07 23:05:15 jwolf Exp $
 
 /**
 * Adjust content width according to the absence or presence of sidebars.
@@ -54,20 +36,20 @@ function amadou_get_sideBars_width($sidebar_left, $sidebar_right) {
  *   An array containing the breadcrumb links.
  * @return a string containing the breadcrumb output.
  */
-function amadou_breadcrumb($breadcrumb) {
+function phptemplate_breadcrumb($breadcrumb) {
    if (!empty($breadcrumb)) {
      return '<div class="breadcrumb">'. implode(' :: ', $breadcrumb) .'</div>';
    }
  }
 
 /**
- * Return themed links.
- * Creates the type of delimiter used for $links
- */
-function amadou_links($links, $attributes = array('class' => 'links')) {
-  $output = '';
+* Catch the theme_links function 
+*/
+function phptemplate_links($links, $attributes = array('class' => 'links')) {
+$output = '';
 
   if (count($links) > 0) {
+    $output = '<ul'. drupal_attributes($attributes) .'>';
 
     $num_links = count($links);
     $i = 1;
@@ -89,13 +71,11 @@ function amadou_links($links, $attributes = array('class' => 'links')) {
       $extra_class = '';
       if ($i == 1) {
         $extra_class .= 'first ';
-      } else {
-        $output .= '&nbsp;&bull; &nbsp;';
       }
       if ($i == $num_links) {
         $extra_class .= 'last ';
       }
-      $output .= '<span class="'. $extra_class . $class .'">';
+      $output .= '<li class="'. $extra_class . $class .'">';
 
       // Is the title HTML?
       $html = isset($link['html']) && $link['html'];
@@ -116,13 +96,14 @@ function amadou_links($links, $attributes = array('class' => 'links')) {
       }
 
       $i++;
-      $output .= "</span>\n";
+      $output .= "</li>\n";
     }
 
+    $output .= '</ul>';
   }
 
   return $output;
-}
+} 
 
 /**
 * Customize a TinyMCE theme.

@@ -1,5 +1,5 @@
 /** Amadou 3.x
-* $Id: layout.css,v 1.1.2.2 2007/07/04 21:17:26 jwolf Exp $
+* $Id: layout.css,v 1.1.2.2.2.1 2007/12/07 23:05:15 jwolf Exp $
 */
 
 #container
@@ -27,7 +27,7 @@
 	float:left;
 	margin:0;
 	overflow:hidden;
-	padding:0 0 4em;
+	padding:1em 0 4em;
 /*	width is defined with the _get_mainContent_width function in template.php */
 }
 
@@ -51,7 +51,7 @@
 {
 	float:left;
 	margin:0 0 0 1.45em;
-	padding:0;
+	padding:0.75em 0 0;
 	width:180px;
 }
 
@@ -59,7 +59,7 @@
 {
 	float:left;
 	margin:0;
-	padding:0 0 0 1.45em;
+	padding:0.75em 0 0 1.45em;
 	width:180px;
 }
 
